@@ -1,142 +1,249 @@
-# Projet MonShop - Flask & Jinja
+# 🛍️ MonShop - E-commerce Flask
 
-**Projet pédagogique L2 Informatique - E-commerce**
+> Application e-commerce moderne développée avec Flask et SQLAlchemy
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0.0-green.svg)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0.25-red.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
-## � Démarrage Rapide
+## 📋 Table des matières
 
-### Avec Docker (Recommandé - 1 commande)
+- [À propos](#-à-propos)
+- [Fonctionnalités](#-fonctionnalités)
+- [Démarrage rapide](#-démarrage-rapide)
+- [Installation détaillée](#-installation-détaillée)
+- [Structure du projet](#-structure-du-projet)
+- [Modèles de données](#-modèles-de-données)
+- [Documentation](#-documentation)
+
+---
+
+## 📖 À propos
+
+**MonShop** est une application e-commerce complète avec :
+
+- 🛍️ Gestion de catalogue produits avec catégories et sous-catégories
+- 🛒 Système de panier d'achat dynamique
+- 👤 Authentification multi-rôles (admin, gérant, client)
+- 💾 Base de données relationnelle avec SQLAlchemy ORM
+- 📱 Interface responsive
+- 🔍 Recherche et filtres avancés
+
+**Stack technique :** Flask, SQLAlchemy, Jinja2, SQLite
+
+---
+
+## ✨ Fonctionnalités
+
+### 🛍️ Catalogue
+
+- Navigation par catégories et sous-catégories
+- Recherche de produits
+- Filtrage par marque et prix
+- Fiches produits détaillées
+
+### 🛒 Panier
+
+- Ajout/suppression d'articles
+- Modification des quantités
+- Persistance du panier en session
+
+### 👤 Authentification
+
+- Inscription et connexion
+- Gestion de profil utilisateur
+- Rôles utilisateurs (admin, gérant, client)
+
+### 💾 Base de données
+
+- SQLite (développement)
+- Modèles avec SQLAlchemy ORM
+- Fixtures de données pour tests
+
+---
+
+## 🚀 Démarrage rapide
+
+### ⚡ Option 1 : Script automatique (Recommandé)
 
 ```bash
-docker-compose up
+# Cloner le projet
+git clone https://github.com/votre-username/votre-repo.git
+cd tp-projet
+
+# Installer et lancer
+./setup.sh
 ```
 
-Puis ouvrez <http://localhost:5000>
-
-### Sans Docker
-
-```bash
-pip install -e .
-python run.py development
-```
-
-**📘 Pour le déploiement en ligne ou plus de détails, consultez [DEPLOYMENT.md](DEPLOYMENT.md)**
+**➜** L'application sera accessible sur <http://localhost:5000>
 
 ---
 
-## �📖 À propos
-
-Ce projet est un support pédagogique pour apprendre Flask et Jinja à travers le développement progressif d'un site de e-commerce.
-Vous allez construire le site en suivant les User Stories ci-dessous.
-
----
-
-## 📁 Structure attendue du dépôt étudiant
+## 📁 Structure du projet
 
 ```
 tp-projet/
-├── app.py                # Application Flask (point d'entrée)
-├── run.py                # Script de lancement du serveur
-├── README.md             # Ce fichier
-├── requirements.txt      # Dépendances Python
-├── pyproject.toml        
-├── .vscode/
-│   └── settings.json     # Configuration VS Code (doit être présent)
-├── data/
-│   └── json/
-│       ├── categories.json
-│       ├── products.json
-│       └── users.json
-├── static/
+├── 📄 app.py                   # Application Flask principale
+├── 📄 run.py                   # Script de lancement
+├── 📄 config.py                # Configuration de l'application
+├── 📄 setup.sh                 # Script d'installation automatique
+├── 📄 pyproject.toml           # Dépendances et configuration
+│
+├── 📂 src/                     # Code source
+│   ├── 📂 models/              # Modèles de données (SQLAlchemy)
+│   │   ├── category.py
+│   │   ├── product.py
+│   │   ├── user.py
+│   │   ├── cart.py
+│   │   └── cart_item.py
+│   │
+│   ├── 📂 auth/                # Authentification
+│   │   ├── routes.py
+│   │   └── utils.py
+│   │
+│   ├── 📂 catalog/             # Catalogue produits
+│   │   └── routes.py
+│   │
+│   ├── 📂 cart/                # Panier d'achat
+│   │   ├── routes.py
+│   │   └── services.py
+│   │
+│   ├── 📂 api/                 # API REST
+│   │   └── routes.py
+│   │
+│   └── 📂 templates/           # Templates Jinja2
+│       ├── base.html
+│       ├── index.html
+│       ├── auth/
+│       └── cart/
+│
+├── 📂 static/                  # Fichiers statiques
 │   ├── css/
-│   │   └── style.css
+│   ├── js/
 │   └── img/
-│       └── products/
-│       └── logo.svg
-│       └── favicon.svg
-├── templates/
-│   ├── base.html
-│   ├── index.html
-│   └── catalog/
-│       ├── products.html
-│       └── product_detail.html
-├── routes/
-│   ├── __init__.py
-│   └── catalog.py
+│
+└── 📂 datafixtures/            # Données de test
+    ├── import_all.py
+    └── json/
+        ├── categories.json
+        ├── products.json
+        └── users.json
 ```
 
 ---
 
-## 📁 Modèles de données
+## 💾 Modèles de données
 
-Le projet utilise SQLAlchemy avec SQLite et fournit trois modèles de base :
+Le projet utilise **SQLAlchemy** avec **SQLite** et fournit cinq modèles principaux :
 
-### Category
+### 📦 Category
 
 Représente les catégories et sous-catégories de produits avec une relation parent-enfant.
 
-- Champs : `id`, `name`, `slug`, `parent_id`
-- Relations : `parent` (catégorie parente), `children` (sous-catégories)
-- Méthodes : recherche par nom/slug/id, récupération des catégories principales et sous-catégories
+**Champs :**
 
-### Product
+- `id` : Identifiant unique
+- `name` : Nom de la catégorie
+- `slug` : URL-friendly identifier
+- `parent_id` : Référence à la catégorie parente
+
+**Relations :**
+
+- `parent` : Catégorie parente
+- `children` : Sous-catégories
+
+### 🏷️ Product
 
 Représente les produits du catalogue.
 
-- Champs : `id`, `name`, `slug`, `brand`, `description`, `price`, `category_id`, `subcategory_id`, `image_url`, `stock_quantity`
-- Relations : `category` (catégorie principale), `subcategory` (sous-catégorie optionnelle)
-- Méthodes : recherche par nom/slug, filtrage par catégorie/marque, récupération des marques disponibles
+**Champs :**
 
-### User
+- `id`, `name`, `slug`, `brand`
+- `description`, `price`
+- `category_id`, `subcategory_id`
+- `image_url`, `stock_quantity`
 
-Représente les utilisateurs du site (admin, gérant, client).
+**Relations :**
 
-- Champs : `id`, `username`, `password`, `email`, `role`, `adresse`, `code_postal`, `ville`, `pays`
-- Méthodes : recherche par id/email/username, récupération de tous les utilisateurs
+- `category` : Catégorie principale
+- `subcategory` : Sous-catégorie (optionnelle)
+
+### 👤 User
+
+Représente les utilisateurs du site.
+
+**Champs :**
+
+- `id`, `username`, `password`, `email`
+- `role` : admin, gérant, client
+- `adresse`, `code_postal`, `ville`, `pays`
+
+### 🛒 Cart & CartItem
+
+Gestion du panier d'achat.
+
+**Cart :**
+
+- `id`, `user_id`, `created_at`, `updated_at`
+
+**CartItem :**
+
+- `id`, `cart_id`, `product_id`, `quantity`
 
 ---
 
-## 🚀 Installation et lancement
+## 🛠️ Technologies utilisées
 
-   Le projet se lance comme pour le cycle précédent (cf README du dossier parent avec installation des dépendances, lancement du projet web).
-
-   La **différence** réside dans le fait que désormais nous utilisons une base de données. Il faut donc créer la structure et la peupler avant de lancer l'application web. Pour ce faire, il suffit d'exécuter ce qu'on appelle une **datafixtures** qui va créer la structure de la base de données à partir des modèles et dans un deuxième temps à partir de fichiers json va peupler la base de données avec des données initiales. Ces données seront ensuite modifiées en base de données via l'utilisation de l'application Web.
-
-   **Initialiser la base de données** :
-
-   ```bash
-   python3 -m datafixtures.import_all
-   ```
-
-   Ce script va :
-
-- Créer toutes les tables nécessaires (categories, users, products)
-- Importer les catégories depuis `datafixtures/json/categories.json`
-- Importer les utilisateurs depuis `datafixtures/json/users.json`
-- Importer les produits depuis `datafixtures/json/products.json`
+| Technologie | Version | Usage |
+|-------------|---------|-------|
+| **Python** | 3.8+ | Langage principal |
+| **Flask** | 3.0.0 | Framework web |
+| **SQLAlchemy** | 2.0.25 | ORM base de données |
+| **Flask-SQLAlchemy** | 3.1.1 | Intégration SQLAlchemy |
+| **Jinja2** | - | Moteur de templates |
+| **SQLite** | - | Base de données |
 
 ---
 
-## 📖 Ressources et conseils
+## 📚 Documentation
 
-- [Liste des User stories à développer](https://foad.univ-rennes.fr/mod/page/view.php?id=1020062)
+- **[Guide de démarrage rapide](QUICKSTART.md)** - Installation en 5 minutes
+- **[Informations projet](PROJET_INFO.md)** - Vue d'ensemble complète
+- **[Configuration](config.py)** - Paramètres de l'application
+
+### Ressources externes
+
 - [Documentation Flask](https://flask.palletsprojects.com/)
-- [Documentation Jinja](https://jinja.palletsprojects.com/)
+- [Documentation SQLAlchemy](https://docs.sqlalchemy.org/)
+- [Documentation Jinja2](https://jinja.palletsprojects.com/)
 - [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
-- [Real Python - Flask](https://realpython.com/tutorials/flask/)
-
-**Conseils :**
-
-- Suivez la progression des User Stories dans l'ordre
-- Testez régulièrement votre application
-- Utilisez les outils de qualité de code (flake8, black, djlint...)
-- Demandez de l'aide à l'enseignant en cas de blocage
 
 ---
 
 ## 📝 Licence
 
-Projet pédagogique - Libre d'utilisation pour l'enseignement
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
+
+## 👨‍💻 Auteur
+
+**Erwann Jouet**
+
+- GitHub: [@Erwann-Jouet](https://github.com/Erwann-Jouet)
+
+---
+
+## 🙏 Remerciements
+
+- Flask et SQLAlchemy pour leurs excellents frameworks
+- La communauté Python pour les ressources et documentation
+
+---
+
+**⭐ N'hésitez pas à mettre une étoile si ce projet vous a plus !
+
+**Bon développement ! 🚀**
