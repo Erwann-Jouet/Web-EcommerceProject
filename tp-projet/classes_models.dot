@@ -1,0 +1,137 @@
+digraph "classes_models" {
+rankdir=BT
+charset="utf-8"
+node [shape="record", style="filled", fillcolor="lightblue"]
+edge [arrowhead="open"]
+
+// Classe Category
+"Category" [label=<{<b>Category</b>|
++ id : Integer<br align="left"/>
++ name : String<br align="left"/>
++ slug : String<br align="left"/>
++ parent_id : Integer<br align="left"/>
+|
++ find_by_id(id: int): Category \| None<br align="left"/>
++ find_by_name(name: str): Category \| None<br align="left"/>
++ find_by_slug(slug: str): Category \| None<br align="left"/>
++ find_all_parents(): list[Category]<br align="left"/>
++ find_subcategories_by_parent_id(parent_id: int): list[Category]<br align="left"/>
++ find_subcategories_by_parent_slug(parent_slug: str): list[Category]<br align="left"/>
++ to_dict(): dict<br align="left"/>
+}>]
+
+// Classe Product
+"Product" [label=<{<b>Product</b>|
++ id : Integer<br align="left"/>
++ name : String<br align="left"/>
++ slug : String<br align="left"/>
++ brand : String<br align="left"/>
++ description : Text<br align="left"/>
++ price : Float<br align="left"/>
++ category_id : Integer<br align="left"/>
++ subcategory_id : Integer<br align="left"/>
++ stock_quantity : Integer<br align="left"/>
++ image_url : String (propriété)<br align="left"/>
++ images_url : list[String] (propriété)<br align="left"/>
+|
++ find_by_name(name: str): Product \| None<br align="left"/>
++ find_by_slug(slug: str): Product \| None<br align="left"/>
++ find_all(): list[Product]<br align="left"/>
++ find_by_category_id(category_id: int): list[Product]<br align="left"/>
++ find_by_filters(...): list[Product]<br align="left"/>
++ find_brands_by_category(category_id: int): list[str]<br align="left"/>
++ find_brands_by_subcategory(subcategory_id: int): list[str]<br align="left"/>
++ get_images_url(): list[str]<br align="left"/>
++ get_first_image_url(): str \| None<br align="left"/>
++ to_dict(): dict<br align="left"/>
+}>]
+
+// Classe ProductImage
+"ProductImage" [label=<{<b>ProductImage</b>|
++ id : Integer<br align="left"/>
++ product_id : Integer<br align="left"/>
++ url : String<br align="left"/>
++ order : Integer<br align="left"/>
+|
++ to_dict(): dict<br align="left"/>
+}>]
+
+// Classe User
+"User" [label=<{<b>User</b>|
++ id : Integer<br align="left"/>
++ username : String<br align="left"/>
++ firstname : String<br align="left"/>
++ lastname : String<br align="left"/>
++ password : String<br align="left"/>
++ email : String<br align="left"/>
++ role : String<br align="left"/>
++ adresse : String<br align="left"/>
++ code_postal : String<br align="left"/>
++ ville : String<br align="left"/>
++ pays : String<br align="left"/>
+|
++ find_by_id(user_id: int): User \| None<br align="left"/>
++ find_by_email(email: str): User \| None<br align="left"/>
++ find_by_username(username: str): User \| None<br align="left"/>
++ find_all(): list[User]<br align="left"/>
++ create(...): User<br align="left"/>
++ update(**kwargs): None<br align="left"/>
++ to_dict(): dict<br align="left"/>
+}>]
+
+// Classe Cart
+"Cart" [label=<{<b>Cart</b>|
++ id : Integer<br align="left"/>
++ user_id : Integer<br align="left"/>
++ status : String<br align="left"/>
++ created_at : DateTime<br align="left"/>
++ ordered_at : DateTime<br align="left"/>
++ total : Float (propriété)<br align="left"/>
++ item_count : Integer (propriété)<br align="left"/>
+|
++ find_by_id(cart_id: int): Cart \| None<br align="left"/>
++ find_active_cart(user_id: int): Cart \| None<br align="left"/>
++ get_or_create_cart(user_id: int): Cart<br align="left"/>
++ find_orders_by_user(user_id: int): list[Cart]<br align="left"/>
++ find_all_orders(): list[Cart]<br align="left"/>
++ add_product(product: Product, quantity: int): CartItem<br align="left"/>
++ remove_product(product_id: int): bool<br align="left"/>
++ update_quantity(product_id: int, quantity: int): bool<br align="left"/>
++ clear(): None<br align="left"/>
++ place_order(): None<br align="left"/>
++ to_dict(): dict<br align="left"/>
+}>]
+
+// Classe CartItem
+"CartItem" [label=<{<b>CartItem</b>|
++ id : Integer<br align="left"/>
++ cart_id : Integer<br align="left"/>
++ product_id : Integer<br align="left"/>
++ quantity : Integer<br align="left"/>
++ unit_price : Float<br align="left"/>
++ subtotal : Float (propriété)<br align="left"/>
+|
++ to_dict(): dict<br align="left"/>
+}>]
+
+// Relations Category
+"Category" -> "Category" [label=" parent\n0..1", style="solid", arrowhead="open"]
+"Category" -> "Category" [label=" children\n*", style="solid", arrowhead="open", dir="back"]
+
+// Relations Product
+"Product" -> "Category" [label=" category\n1", style="solid", arrowhead="open"]
+"Product" -> "Category" [label=" subcategory\n0..1", style="solid", arrowhead="open"]
+
+// Relations ProductImage
+"ProductImage" -> "Product" [label=" product\n1", style="solid", arrowhead="open"]
+"Product" -> "ProductImage" [label=" images\n*", style="solid", arrowhead="open", dir="back"]
+
+// Relations Cart
+"Cart" -> "User" [label=" user\n1", style="solid", arrowhead="open"]
+"User" -> "Cart" [label=" carts\n1..*", style="solid", arrowhead="open", dir="back"]
+
+// Relations CartItem
+"CartItem" -> "Cart" [label=" cart\n1", style="solid", arrowhead="open"]
+"Cart" -> "CartItem" [label=" items\n*", style="solid", arrowhead="open", dir="back"]
+"CartItem" -> "Product" [label=" product\n1", style="solid", arrowhead="open"]
+}

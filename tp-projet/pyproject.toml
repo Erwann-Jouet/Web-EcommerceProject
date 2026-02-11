@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "web-prj-bas"
+version = "0.1.0"
+description = "Bac à sable pour le projet WEB du S3 (Flask et SQLAlchemy)"
+authors = [{ name = "Fabien Guntz", email = "fabien.guntz@univ-rennes.fr" }]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+  "Flask==3.0.0",
+  "SQLAlchemy==2.0.25",
+  "Flask-SQLAlchemy==3.1.1",
+  "python-dotenv>=1.0.0",
+  "requests>=2.0.0",
+  "types-requests>=2.0.0"
+]
+
+[project.optional-dependencies]
+# Outils pour le DÉVELOPPEMENT seulement
+dev = [
+  "flake8>=6.0.0",            # Analyse statique du code
+  "flake8-pyproject>=1.2.0",  # Support pyproject.toml pour flake8
+  "isort>=5.12.0",            # Tri des imports
+  "mypy>=1.0.0",              # Vérification des types
+  "black>=23.0.0",            # Formatage automatique du code
+  "pytest>=7.0.0",            # Framework de tests
+  "pytest-cov>=4.0.0",        # Rapport de couverture de tests
+  "playwright>=1.30.0",       # Tests end-to-end avec navigateur
+  "pytest-playwright>=0.4.0", # Intégration pytest pour playwright
+  "radon>=5.1.0",             # Complexité du code
+  "djlint>=1.0.0"             # Linter pour les templates Jinja
+]
+# dev = [
+#     "pylint>=2.17.0",     # Analyse de code
+# ]
+
+# Outils pour la PRODUCTION
+prod = ["gunicorn>=21.0.0"]
+
+[tool.black]
+line-length = 110
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 110
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+
+# Flake8 a du mal à fonctionner via pyproject.toml
+# [tool.flake8]
+# max-line-length = 100
+# extend-ignore = ["E203", "W503"]
+# exclude = [".venv", "build", "datafixtures", "script_python"]
+
+# [tool.pylint.messages_control]
+# disable = ["C0330", "C0326"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+files = ["app.py", "src/"]
+exclude = ["data/", "__pycache__/", ".venv/", "src/models/", "src/services/"]
+[[tool.mypy.overrides]]
+module = "dotenv"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+# addopts = "--cov=src --cov-report=html --cov-report=term-missing"
+
+# Configuration de djlint
+[tool.djlint]
+profile = "jinja"
+indent = 2
+max_line_length = 100
+format_css = true
+format_js = true
+ignore = "H006,H030,H031"

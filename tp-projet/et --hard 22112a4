@@ -1,0 +1,106 @@
+[33mf5f021f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mprojet[m[33m, [m[1;31morigin/projet[m[33m)[m us4 correction route
+[33mf52d747[m us4 correction auth route
+[33mcc47723[m us4 test profile
+[33m3fbca72[m us4 correction2 erreur utils
+[33m8417112[m us4 correction erreur utils
+[33m21f1490[m us4
+[33m22112a4[m Fix Lint/MyPY Import
+[33m23db7ef[m Fix MyPy merge
+[33m64f9809[m Fix Lint RegisterTooLong
+[33m3d5d1e2[m Fix Import notUsed
+[33md1fe377[m Fix cart_Services function
+[33m7c3d6e7[m Import fix MyPy
+[33m5f75598[m Import fix api/routes
+[33m469dc4a[m Import fix cart
+[33m6e9cde8[m Import fix
+[33m13bfe24[m us1
+[33m590a0bd[m US2_TS1 correction3
+[33m864b910[m US2_TS1 correction2
+[33m18ab7c1[m US2_TS2 correction2
+[33m68e0dd4[m US2_TS2 correction
+[33m022eefb[m PRJ.US2.TS3 correction
+[33m965cd39[m PRJ.US2.TS3 correction
+[33mccfe4bc[m PRJ.US2.TS3
+[33mca7e971[m Back Version redirect registration
+[33m8de486b[m Fix redirect registration
+[33mfbd09fa[m change user redirect registration
+[33m7ba7a7d[m Add user redirect registration
+[33m3f1d20d[m Add fix US3.4
+[33mcf93d11[m Add input validation CSS styles and improve JavaScript validation
+[33m480e21b[m Fix MyPy errors in api/routes.py - add missing return statement and proper status codes
+[33m9194b5d[m Fix home route in app.py - move inside create_app function
+[33m8a1be94[m Fix JavaScript validation for password and user fields
+[33mdd1cf26[m Configure blueprint template_folder for auth module
+[33md7b35a6[m Move register template to correct location src/auth/templates/register.html
+[33mb41a90c[m Fix register template location and submit button class
+[33m2810bac[m Implement user registration (US3)
+[33m9577914[m Add POST method to logout route
+[33ma12fa3b[m Fix login
+[33mdc98ead[m Fix duplicate login form display
+[33m103a2a8[m Add users to fixtures
+[33me59aa74[m Add user loading to chargeur
+[33m082a404[m Try US1
+[33ma634382[m Fix isort imports
+[33mb6d8086[m Fix isort
+[33mb1b36a3[m Correction erreur HTML2
+[33m19c79e9[m Correction erreur HTML
+[33m85f9065[m Correction erreur US2_TS2
+[33mdee5fed[m Correction Lint
+[33m38612f7[m Correction erreur us1
+[33mdb481a2[m Correction  ts1 5
+[33m417aea3[m Correction erreurs2
+[33mec1d75e[m Correction erreurs
+[33me8d57fe[m Correction erreur Lint
+[33m5eabd0d[m PRJ.US2: Gestion panier
+[33m6c233c2[m fichier nano
+[33maba6653[m Erreurs import
+[33m97f51ed[m "Erreurs"
+[33m5f5c68b[m erreur Lint
+[33m6f1c5de[m modification erreur
+[33m6fea2f0[m PRJ.US1: update version
+[33m01b8501[m Correction Erreurs MyPy V4
+[33m8b95c8b[m Correction Erreurs MyPy V4
+[33me650084[m fix:init api
+[33md3c2527[m Correction Erreurs MyPy V3
+[33madbd943[m Correction Erreurs MyPy V2
+[33md8477f3[m fix:nouvelle structure
+[33m56252f1[m Correction Erreurs MyPy
+[33m2339643[m Correction Erreurs Lint V9
+[33m6e01b4f[m Correction Erreurs Lint V8
+[33m326f1d4[m Correction Erreurs Lint V7
+[33m145e3fa[m Correction Erreurs Lint V6
+[33mb083796[m Correction Erreurs Lint V5
+[33m9a1aed3[m Correction Erreurs Lint V4
+[33m134f789[m Correction Erreurs Lint V3
+[33meeae2a5[m Correction Erreurs Lint V2
+[33md2ae7de[m Correction Erreurs Lint
+[33m263add3[m fix:correction bouton cart
+[33m118c2d2[m fix:correction erreur Lint
+[33mc9a3394[m fix:correction erreur HTML
+[33m8c93776[m fix:modification compte client
+[33m93b4aac[m[33m ([m[1;31mupstream/projet[m[33m)[m fix: correction lien chemin DATABASE_URL
+[33m75bc563[m fix:test
+[33m309c832[m fix:compte client2
+[33mefdf2b7[m fix:compte client
+[33m7bd90e3[m fix:mise en page
+[33m0099e6e[m fix:erreur
+[33mddc129a[m PRJ.TS1.5
+[33me065b15[m fix:erreur
+[33m09062f2[m fix:Mypi
+[33m9a728b2[m fix:Mypi
+[33m15cd108[m fix:catalog.route
+[33macbf2ac[m fix:catalog.route
+[33m512bba2[m PRJ.TS1.2
+[33me3bf3e1[m PRJ.TS1.1
+[33me46e480[m fix: correction erreur mypy fichier user.py
+[33m2dda1a4[m fix: pb chemin sqlite dans configuration Flask
+[33mc586e5e[m fix: correction erreurs mypy et ajout champ phone pour le modèle User
+[33m83e2656[m fix: ajout règles validation HTML
+[33mdd0b0b7[m fix: mise à jour configuration mypy
+[33mb6b311e[m chore: mise à jour modèles Cart, CartItem et Product par rapport aux besoins de PRJ.US2
+[33m74ef42e[m chore: mise à jour modèle User (ajout champs prénom et nom)
+[33m7f54ef8[m fix: correction bug détection venv dans run.py en mode production
+[33mb3005cf[m fix: màj datafixtures par rapport à l'attribut slug
+[33md081e41[m chore : mise à jour modèles et refactorisation du code
+[33mec01b48[m Initial commit
+[33ma9826a5[m Initial commit

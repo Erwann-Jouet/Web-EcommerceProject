@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if current_category %}
+        {{ current_category.name }} - Comptoir de l'Ouest
+    {% else %}
+        Catalogue - Comptoir de l'Ouest
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="catalog-page">
+    
+    <div class="catalog-header">
+        
+        {% if current_category %}
+            <h1>{{ current_category.name }}</h1>
+            <p>{{ current_category.description }}</p>
+        {% else %}
+            <h1>Notre Catalogue</h1>
+            <p>Découvrez l'ensemble de nos pépites bretonnes et vendéennes.</p>
+        {% endif %}
+
+        <div class="category-menu">
+            <a href="{{ url_for('catalog.products') }}">TOUT VOIR</a>
+
+            {% for category in categories %}
+                <a href="{{ url_for('catalog.category_products', slug=category.slug) }}" class="cat-btn {% if current_category and current_category.id == category.id %}active{% endif %}">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+
+        {% if current_category %}
+        <div class="subcategory-filter">
+            <p class="filter-label">Filtrez votre recherche :</p>
+            <div class="filter-buttons">
+                <button type="button" class="sub-btn active" onclick="filterProducts('all', this)">Tout voir</button>
+
+                {% if current_category.slug == 'vendee' %}
+                    <button type="button" class="sub-btn" onclick="filterProducts('douceurs', this)">Douceurs</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('apéro', this)">Apéro & Entrées</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('terre', this)">Terre & Mer</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('cave', this)">Cave Vendéenne</button>
+                
+                {% elif current_category.slug == 'bretagne' %}
+                    <button type="button" class="sub-btn" onclick="filterProducts('douceurs', this)">Douceurs</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('apéro', this)">Apéro & Terroir</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('gastronomie', this)">Gastronomie</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('cidrerie', this)">Cidrerie & Cave</button>
+
+                {% elif current_category.slug == 'idees-cadeaux' %}
+                    <button type="button" class="sub-btn" onclick="filterProducts('coffrets', this)">Coffrets Gourmands</button>
+                    <button type="button" class="sub-btn" onclick="filterProducts('accessoires', this)">Accessoires</button>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <div class="container">
+        <div class="catalog-grid" id="product-grid">
+            {% for product in products %}
+                <div class="product-item" data-sub="{{ (product.subcategory or '')|lower }}">
+                    
+                    <div class="product-card">
+                        
+                        <a href="{{ url_for('catalog.product_detail', product_id=product.id) }}" 
+                           class="card-image-wrapper product-card-link">
+                            {% if product.image %}
+                                <img src="{{ url_for('static', filename='img/products/' ~ product.image) }}" alt="{{ product.name }}">
+                            {% else %}
+                                <div class="no-image">Pas d'image</div>
+                            {% endif %}
+                            
+                            {% if product.stock_quantity > 0 and product.stock_quantity < 5 %}
+                                <span class="badge-stock">Vite !</span>
+                            {% endif %}
+                        </a>
+
+                        <div class="card-info">
+                            <span class="card-brand">{{ product.brand }}</span>
+                            
+                            <a href="{{ url_for('catalog.product_detail', product_id=product.id) }}" class="text-decoration-none text-reset">
+                                <h3 class="card-title">{{ product.name }}</h3>
+                            </a>
+                            
+                            <div class="card-bottom d-flex flex-column align-items-start">
+                                <span class="card-price mb-2">{{ product.price }} €</span>
+                                
+                                <div class="d-flex w-100 mt-2">
+                                    <select class="form-select me-2 quantity-select w-auto" id="qty-{{ product.id }}">
+                                        {% for i in range(1, 6) %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <button type="button" 
+                                            class="btn btn-primary add-to-cart-btn flex-grow-1" 
+                                            data-product-id="{{ product.id }}">
+                                        Ajouter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div id="no-result-message" class="no-result-box">
+            <p>Aucun produit trouvé dans cette sous-catégorie pour le moment.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function filterProducts(categoryName, btnElement) {
+    var buttons = document.getElementsByClassName('sub-btn');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+    }
+    btnElement.classList.add('active');
+
+    var products = document.getElementsByClassName('product-item');
+    var visibleCount = 0;
+    var searchStr = categoryName.toLowerCase();
+
+    for (var i = 0; i < products.length; i++) {
+        var productCat = products[i].getAttribute('data-sub');
+        
+        if (searchStr === 'all' || (productCat && productCat.includes(searchStr))) {
+            products[i].style.display = "block";
+            visibleCount++;
+        } else {
+            products[i].style.display = "none";
+        }
+    }
+
+    var noResult = document.getElementById('no-result-message');
+    if (visibleCount === 0) {
+        noResult.style.display = "block";
+    } else {
+        noResult.style.display = "none";
+    }
+}
+</script>
+{% endblock %}

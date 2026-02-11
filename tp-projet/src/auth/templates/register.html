@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Inscription - Comptoir de l'Ouest{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Créer un compte</div>
+                    <div class="card-body">
+                        {% if session.get('register_error') %}
+                            <div id="form-error-message" class="alert alert-danger">{{ session.pop("register_error") }}</div>
+                        {% endif %}
+                        <form id="register-form"
+                              action="{{ url_for('auth.register') }}"
+                              method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Nom utilisateur</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="username"
+                                               name="username"
+                                               required
+                                               minlength="3"
+                                               maxlength="64"
+                                               pattern="[a-z0-9]+">
+                                        <small class="form-text text-muted">Lettres minuscules et chiffres uniquement</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email"
+                                               class="form-control"
+                                               id="email"
+                                               name="email"
+                                               required
+                                               maxlength="120">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="firstname" class="form-label">Prénom</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="firstname"
+                                               name="firstname"
+                                               required
+                                               minlength="2"
+                                               maxlength="64">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="lastname" class="form-label">Nom</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="lastname"
+                                               name="lastname"
+                                               required
+                                               minlength="2"
+                                               maxlength="64">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="adresse" class="form-label">Adresse</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="adresse"
+                                       name="adresse"
+                                       required
+                                       minlength="5"
+                                       maxlength="128">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="code_postal" class="form-label">Code postal</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="code_postal"
+                                               name="code_postal"
+                                               required
+                                               pattern="\d{5}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Téléphone</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="ville" class="form-label">Ville</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="ville"
+                                               name="ville"
+                                               required
+                                               minlength="2"
+                                               maxlength="64">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="pays" class="form-label">Pays</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="pays"
+                                               name="pays"
+                                               required
+                                               minlength="2"
+                                               maxlength="64">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Mot de passe</label>
+                                        <input type="password"
+                                               class="form-control"
+                                               id="password"
+                                               name="password"
+                                               required
+                                               minlength="6">
+                                        <small class="form-text text-muted">Min. 6 caractères, au moins une majuscule, un chiffre et un caractère spécial</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="password_confirm" class="form-label">Confirmer le mot de passe</label>
+                                        <input type="password"
+                                               class="form-control"
+                                               id="password_confirm"
+                                               name="password_confirm"
+                                               required
+                                               minlength="6">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit-btn">Créer un compte</button>
+                            <a href="{{ url_for('home') }}" class="btn btn-secondary">Annuler</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}

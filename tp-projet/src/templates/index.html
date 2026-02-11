@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Comptoir de l'Ouest{% endblock %}
+
+{% block content %}
+<div class="modern-hero">
+    <div class="hero-container">
+        <h1 class="main-title">Comptoir de l'Ouest</h1>
+        <p class="tagline">PRODUITS BRETAGNE & VENDÉE</p>
+        
+        <div class="separator-line"></div>
+        
+        <p class="hero-description">
+            Deux régions, une même passion. Nous avons uni nos racines pour vous faire découvrir le meilleur de nos terroirs. 
+            Ici, chaque produit raconte une histoire, celle de producteurs locaux et de traditions ancrées dans l'Ouest.
+        </p>
+        
+        <a href="{{ url_for('catalog.products') }}" class="btn-main">Voir tout le catalogue</a>
+    </div>
+</div>
+
+<div class="container regions-split">
+    
+    <a href="{{ url_for('catalog.category_products', slug='vendee') }}" class="terroir-card card-vendee">
+        <div class="overlay"></div>
+        <div class="card-details">
+            <h2>La Vendée</h2>
+            <p>Brioches dorées, Préfou à l'ail & Mogettes...</p>
+            <span class="arrow-link">Explorer →</span>
+        </div>
+    </a>
+
+    <a href="{{ url_for('catalog.category_products', slug='bretagne') }}" class="terroir-card card-bretagne">
+        <div class="overlay"></div>
+        <div class="card-details">
+            <h2>La Bretagne</h2>
+            <p>Caramel beurre salé, Cidre brut & Fruits de mer...</p>
+            <span class="arrow-link">Explorer →</span>
+        </div>
+    </a>
+
+</div>
+{% endblock %}

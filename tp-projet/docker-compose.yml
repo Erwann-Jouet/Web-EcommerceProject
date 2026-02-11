@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: ecommerce-flask-app
+    ports:
+      - "5000:5000"
+    volumes:
+      # Montage du code source pour le développement (rechargement à chaud)
+      - .:/app
+      # Persister la base de données SQLite
+      - ./data:/app/data
+    environment:
+      - FLASK_CONFIG=development
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DATABASE_URL=sqlite:///data/app.db
+      - FLASK_DEBUG=1
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

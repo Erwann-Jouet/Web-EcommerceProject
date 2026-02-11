@@ -1,0 +1,34 @@
+[flake8]
+# Longueur maximale de ligne (PEP 8 recommande 79)
+max-line-length = 110
+
+# Ignorer certaines règles pour compatibilité avec black
+# E203: whitespace before ':' (compatibilité black)
+# W503: line break before binary operator (style moderne)
+# E501: line too long (géré par black, EN FAIT NON, on garde)
+extend-ignore = E203,W503
+
+# Exclusions de dossiers
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    env,
+    build,
+    dist,
+    data,
+    static,
+    templates,
+    *.egg-info
+
+# Ignorer les imports non utilisés dans __init__.py
+per-file-ignores =
+    __init__.py:F401
+
+# Complexité cyclomatique maximale
+max-complexity = 10
+
+# Affichage
+count = True
+statistics = True

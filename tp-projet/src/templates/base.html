@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Comptoir de l'Ouest{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    
+    {% block styles %}{% endblock %}
+</head>
+<body>
+
+<header aria-label="En-tête du site">
+    <nav aria-label="Navigation principale">
+        
+        <div class="logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='img/logo2.svg') }}" alt="MonShop Logo">
+            </a>
+        </div>
+        
+        {% if request.endpoint != 'home' %}
+            <div class="header-nav">
+                <a href="{{ url_for('home') }}" class="link-home">Retour à l'Accueil</a>
+            </div>
+        {% endif %}
+
+        <div class="auth-section">
+            <a href="{{ url_for('cart.view_cart') }}" class="btn btn-outline-dark me-3 d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill me-2" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm7 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </svg>
+                Panier
+                <span id="cart-item-count" class="badge bg-dark text-white ms-2 rounded-pill">{{ cart_count|default(0) }}</span>
+            </a>
+
+            {% include "auth/login_block.html" %}
+        </div>
+    </nav>
+</header>
+
+<main aria-label="Contenu principal">
+    {% block content %}{% endblock %}
+</main>
+
+<footer aria-label="Pied de page">
+    <p>&copy; 2026 MonShop - Tous droits réservés</p>
+</footer>
+
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log(" Script Panier chargé directement !");
+            
+            const boutonsAjout = document.querySelectorAll('.add-to-cart-btn');
+            
+            console.log("Boutons trouvés :", boutonsAjout.length);
+
+            boutonsAjout.forEach(bouton => {
+                bouton.addEventListener('click', (event) => {
+                    event.preventDefault(); 
+                    console.log("Clic détecté sur un bouton ajouter !");
+
+                    let productId = bouton.dataset.productId;
+                    let quantity = 1;
+                    
+                    const form = bouton.closest('form');
+                    if (form) {
+                        if (!productId) {
+                            const action = form.getAttribute('action');
+                            const matches = action.match(/\/(\d+)$/);
+                            if (matches) productId = matches[1];
+                        }
+                        const inputQty = form.querySelector('input[name="quantity"]');
+                        if (inputQty) quantity = inputQty.value;
+                    }
+
+                    if (productId) {
+                        ajouterAuPanier(productId, quantity);
+                    } else {
+                        alert("Erreur : ID produit introuvable");
+                    }
+                });
+            });
+
+            function ajouterAuPanier(productId, quantity) {
+                fetch(`/api/cart/add/${productId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ quantity: quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const badge = document.getElementById('cart-item-count');
+                        if (badge) badge.textContent = data.cart_count;
+                        
+                        alert("Produit ajouté au panier !");
+                    } else {
+                        alert("Erreur : " + data.error);
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            }
+
+            const boutonsSuppr = document.querySelectorAll('.remove-from-cart-btn');
+            boutonsSuppr.forEach(bouton => {
+                bouton.addEventListener('click', () => {
+                    const item = bouton.closest('.cart-item');
+                    const productId = item.dataset.productId;
+                    if (confirm("Supprimer cet article ?")) {
+                        fetch(`/api/cart/remove/${productId}`, { method: 'DELETE' })
+                        .then(r => r.json())
+                        .then(d => { if(d.success) window.location.reload(); });
+                    }
+                });
+            });
+
+            const inputsQty = document.querySelectorAll('.cart-item-quantity');
+            inputsQty.forEach(input => {
+                input.addEventListener('change', () => {
+                    const item = input.closest('.cart-item');
+                    const productId = item.dataset.productId;
+                    fetch(`/api/cart/add/${productId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ quantity: input.value })
+                    })
+                    .then(r => r.json())
+                    .then(d => { if(d.success) window.location.reload(); });
+                });
+            });
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+</html>

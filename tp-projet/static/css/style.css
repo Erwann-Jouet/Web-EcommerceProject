@@ -1,0 +1,508 @@
+/* ==========================================================================
+   1. VARIABLES & CONFIGURATION
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+    /* --- Couleurs --- */
+    --color-primary: #222222;       /* Noir profond */
+    --color-accent: #c0392b;        /* Rouge (Hover & Actions) */
+    --color-text: #333333;          /* Texte standard */
+    --color-text-light: #666666;    /* Texte secondaire */
+    --color-bg: #ffffff;            /* Fond blanc */
+    --color-bg-alt: #fcfcfc;        /* Fond gris très clair */
+    --color-border: #eeeeee;        /* Bordures */
+
+    /* --- Typographie --- */
+    --font-main: 'Montserrat', sans-serif;
+    --font-display: 'Playfair Display', serif;
+
+    /* --- UI & Espacement --- */
+    --border-radius: 8px;
+    --container-width: 1200px;
+    --transition-smooth: 0.3s ease;
+    --transition-fast: 0.2s ease;
+}
+
+/* ==========================================================================
+   2. RESET & BASE
+   ========================================================================== */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================================================
+   3. LAYOUT (Header & Footer)
+   ========================================================================== */
+.header-signature {
+    text-align: center;
+    padding: 25px 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    background-color: var(--color-bg);
+}
+
+.logo-img {
+    height: 100px;
+    width: auto;
+    transition: transform var(--transition-smooth);
+}
+.logo-img:hover { transform: scale(1.05); }
+
+/* --- Bloc Authentification (Header) --- */
+.auth-block {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+.auth-block a {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.auth-block a:hover {
+    color: var(--color-accent);
+}
+
+footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: 60px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   4. PAGE D'ACCUEIL 
+   ========================================================================== */
+.modern-hero {
+    padding: 80px 20px 60px;
+    text-align: center;
+    background-color: var(--color-bg);
+}
+
+.hero-container { max-width: 800px; margin: 0 auto; }
+
+.main-title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.separator-line {
+    width: 60px; 
+    height: 3px; 
+    background-color: var(--color-accent); 
+    margin: 30px auto;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-top: 10px;
+}
+.btn-main:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+/* --- Cartes Régions --- */
+.regions-split {
+    display: flex;
+    gap: 0;
+    margin-bottom: 80px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    flex-wrap: wrap;
+}
+
+.terroir-card {
+    flex: 1;
+    min-width: 300px;
+    height: 450px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    transition: flex 0.5s ease;
+}
+
+.card-vendee { background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); }
+.card-bretagne { background: linear-gradient(135deg, #1A2980 0%, #26D0CE 100%); }
+
+.terroir-card:hover { flex: 1.5; }
+
+.overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.2);
+    transition: background var(--transition-smooth);
+}
+.terroir-card:hover .overlay { background: rgba(0,0,0,0.4); }
+
+.card-details { position: relative; z-index: 2; padding: 20px; }
+.card-details h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 10px; }
+.card-details p { font-size: 1.1rem; margin-bottom: 20px; opacity: 0.9; }
+
+.arrow-link {
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   5. CATALOGUE (FILTRES & GRILLE)
+   ========================================================================== */
+.catalog-page {
+    background-color: var(--color-bg-alt);
+    padding-bottom: 80px;
+}
+
+.catalog-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-color: var(--color-bg);
+}
+
+.catalog-header h1 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin: 0 0 10px;
+}
+.catalog-header p {
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Filtres Unifiés (Tous les boutons sont pareils maintenant) --- */
+.category-menu, .filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.category-menu { margin-top: 30px; }
+.subcategory-filter { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+
+/* On applique le style "cat-btn" aussi aux "sub-btn" */
+.cat-btn, .sub-btn {
+    padding: 10px 25px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    color: #555;
+    background: white;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    display: inline-block;
+}
+
+/* État actif et survol pour TOUS les boutons */
+.cat-btn:hover, .cat-btn.active,
+.sub-btn:hover, .sub-btn.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- Grille Produits --- */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-smooth);
+}
+.product-card:hover { transform: translateY(-5px); }
+
+.card-image-wrapper {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+    transition: transform 0.5s ease;
+}
+.product-card:hover .card-image-wrapper img { transform: scale(1.05); }
+
+.card-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin: 0 0 15px 0;
+    color: var(--color-primary);
+}
+
+.card-bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f9f9f9;
+    padding-top: 15px;
+}
+
+.card-price { font-weight: bold; font-size: 1.1rem; }
+
+.btn-view {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 20px;
+    transition: var(--transition-fast);
+}
+.product-card:hover .btn-view {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+#no-result-message {
+    display: none;      
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+/* ==========================================================================
+   6. PAGE DÉTAIL PRODUIT
+   ========================================================================== */
+.product-page-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px 80px;
+}
+
+.product-detail-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.detail-image-box {
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.detail-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-smooth);
+}
+.detail-image-box img:hover { transform: scale(1.02); }
+
+.detail-info-box { padding-top: 20px; }
+
+.detail-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    color: var(--color-primary);
+}
+
+.detail-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.detail-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.btn-add-cart {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn-add-cart:hover { background-color: var(--color-accent); }
+
+/* ==========================================================================
+   7. MODULE AUTHENTIFICATION (PRJ.US1)
+   ========================================================================== */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-btn {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background var(--transition-smooth);
+}
+
+.auth-btn:hover {
+    background-color: var(--color-accent);
+}
+
+.error-message {
+    color: #c0392b;
+    background-color: #fadbd8;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+/* ==========================================================================
+   8. MOBILE RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .product-detail-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .detail-image-box { height: 350px; }
+    .detail-title { font-size: 2rem; }
+    
+    .regions-split { gap: 0; }
+    .hero-container h1 { font-size: 2.5rem; }
+}
+
+/* ==========================================================================
+   9. CLASSES UTILITAIRES
+   ========================================================================== */
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}

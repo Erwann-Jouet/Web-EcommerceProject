@@ -1,0 +1,9 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "attribute-boolean-style": ["error", {
+      "style": "empty"
+    }],
+    "no-implicit-button-type": "error"
+  }
+}

@@ -1,0 +1,46 @@
+<div class="auth-container">
+    {% if session.user_id %}
+        <!-- Utilisateur connecté -->
+        <div class="welcome-message">
+            <span class="welcome-text">Bienvenue</span>
+            <span class="firstname">{{ session.firstname }}</span>
+        </div>
+        <a class="profile-link"
+           href="{{ url_for('auth.profile') }}"
+           title="Mon profil">{{ session.firstname[0].upper() if session.firstname else 'U' }}</a>
+        <form action="{{ url_for('auth.logout') }}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger auth-btn">Se déconnecter</button>
+        </form>
+    {% else %}
+        <!-- Utilisateur non connecté -->
+        <form action="{{ url_for('auth.login') }}" method="post" class="auth-form">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                            <div class="error-message alert alert-danger">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% if session.get('login_error') %}
+                <div class="error-message alert alert-danger">{{ session.pop("login_error") }}</div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="login" class="form-label">Identifiant</label>
+                <input type="text" class="form-control" id="login" name="login" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password"
+                       class="form-control"
+                       id="password"
+                       name="password"
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary auth-btn">Se connecter</button>
+        </form>
+        <a href="{{ url_for('auth.register') }}"
+           class="btn btn-secondary register-link">Créer un compte</a>
+    {% endif %}
+</div>

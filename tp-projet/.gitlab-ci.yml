@@ -1,0 +1,17 @@
+stages:
+  - trigger-tests
+
+trigger_tests:
+  stage: trigger-tests
+  trigger:
+    project: l2_istn_web_prj/web-projet-ci-tests
+    strategy: depend
+  variables:
+    ETUDIANT_REPO_NAME: "$CI_PROJECT_NAME"
+    ETUDIANT_REPO_URL: "https://${DEPLOY_TOKEN_USER}:${DEPLOY_TOKEN_PASSWORD}@gitlab2.istic.univ-rennes1.fr/${CI_PROJECT_PATH}.git"
+    ETUDIANT_REPO_BRANCH: "$CI_COMMIT_REF_NAME"
+  only:
+    - branches
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /WIP/

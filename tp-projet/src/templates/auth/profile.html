@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Mon Profil</h2>
+                    </div>
+                    <div class="card-body">
+                        <!-- Bloc de feedback -->
+                        <div id="feedback" class="hidden"></div>
+                        <!-- Mode Affichage -->
+                        <div id="view-mode">
+                            <p>
+                                <strong>Username :</strong> {{ user.username }}
+                            </p>
+                            <p>
+                                <strong>Prénom :</strong> {{ user.firstname }}
+                            </p>
+                            <p>
+                                <strong>Nom :</strong> {{ user.lastname }}
+                            </p>
+                            <p>
+                                <strong>Email :</strong> {{ user.email }}
+                            </p>
+                            <p>
+                                <strong>Adresse :</strong> {{ user.adresse }}
+                            </p>
+                            <p>
+                                <strong>Code postal :</strong> {{ user.code_postal }}
+                            </p>
+                            <p>
+                                <strong>Ville :</strong> {{ user.ville }}
+                            </p>
+                            <p>
+                                <strong>Pays :</strong> {{ user.pays }}
+                            </p>
+                            <button id="edit-btn" type="button" class="btn btn-primary">Modifier</button>
+                        </div>
+                        <!-- Mode Édition -->
+                        <form id="edit-mode" method="post" class="hidden">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="username"
+                                       name="username"
+                                       value="{{ user.username }}"
+                                       disabled>
+                                <small class="form-text text-muted">Le username ne peut pas être modifié</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="firstname" class="form-label">Prénom</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="firstname"
+                                       name="firstname"
+                                       value="{{ user.firstname }}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label">Nom</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="lastname"
+                                       name="lastname"
+                                       value="{{ user.lastname }}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email"
+                                       class="form-control"
+                                       id="email"
+                                       name="email"
+                                       value="{{ user.email }}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="adresse" class="form-label">Adresse</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="adresse"
+                                       name="adresse"
+                                       value="{{ user.adresse or '' }}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="code_postal" class="form-label">Code postal</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="code_postal"
+                                       name="code_postal"
+                                       value="{{ user.code_postal or '' }}"
+                                       pattern="\d{5}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ville" class="form-label">Ville</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="ville"
+                                       name="ville"
+                                       value="{{ user.ville or '' }}"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pays" class="form-label">Pays</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="pays"
+                                       name="pays"
+                                       value="{{ user.pays or '' }}"
+                                       required>
+                            </div>
+                            <button type="submit" id="submit-btn" class="btn btn-success">
+                                Enregistrer les modifications
+                            </button>
+                            <button type="button" id="cancel-btn" class="btn btn-secondary">Annuler</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Lien profil (affiche la première lettre du prénom) -->
+                <a class="profile-link"
+                   href="{{ url_for('auth.profile') }}"
+                   title="Mon profil">
+                    {{ user.firstname[0].upper() if user.firstname else 'U' }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock content %}

@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "name": "Vendée",
+    "slug": "vendee",
+    "subcategories": [
+      {
+        "id": 10,
+        "name": "Douceurs Vendéennes",
+        "slug": "douceurs-vendee"
+      },
+      {
+        "id": 11,
+        "name": "Apéro & Entrées",
+        "slug": "apero-vendee"
+      },
+      {
+        "id": 12,
+        "name": "Terre & Mer",
+        "slug": "terre-mer-vendee"
+      },
+      {
+        "id": 13,
+        "name": "Cave Vendéenne",
+        "slug": "cave-vendee"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bretagne",
+    "slug": "bretagne",
+    "subcategories": [
+      {
+        "id": 20,
+        "name": "Douceurs Bretonnes",
+        "slug": "douceurs-bretagne"
+      },
+      {
+        "id": 21,
+        "name": "Apéro & Terroir",
+        "slug": "apero-bretagne"
+      },
+      {
+        "id": 22,
+        "name": "Gastronomie Bretonne",
+        "slug": "gastronomie-bretagne"
+      },
+      {
+        "id": 23,
+        "name": "Cidrerie & Cave",
+        "slug": "cidrerie-bretagne"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Idées Cadeaux",
+    "slug": "idees-cadeaux",
+    "subcategories": [
+      {
+        "id": 30,
+        "name": "Coffrets Gourmands",
+        "slug": "coffrets-gourmands"
+      },
+      {
+        "id": 31,
+        "name": "Accessoires",
+        "slug": "accessoires"
+    }
+    ]
+  }
+]

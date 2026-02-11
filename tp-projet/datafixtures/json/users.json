@@ -1,0 +1,26 @@
+[
+  {
+    "username": "admin",
+    "firstname": "Admin",
+    "lastname": "Admin",
+    "password": "admin",
+    "email": "admin@monshop.bzh",
+    "role": "admin",
+    "adresse": "1 place du Parlement",
+    "code_postal": "35000",
+    "ville": "Rennes",
+    "pays": "France"
+  },
+  {
+    "username": "test",
+    "password": "test123",
+    "firstname": "Test",
+    "lastname": "User",
+    "email": "test@monshop.bzh",
+    "role": "client",
+    "adresse": "2 rue de Test",
+    "code_postal": "35000",
+    "ville": "Rennes",
+    "pays": "France"
+  }
+]

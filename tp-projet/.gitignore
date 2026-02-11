@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Base de données
+*.db
+*.sqlite3
+instance/*
+!instance/.gitkeep
+
+# Environnement virtuel
+venv/
+.venv/
+env/
+ENV/
+.env.development
+.env.production
+
+# Variables d'environnement (contiennent des secrets)
+.env
+.env.local
+# EXCEPTION: .env.example doit être commité comme modèle
+!.env.example
+
+# Docker
+data/
+*.db
+*.sqlite3
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+htmlcov/
+.nox/
+
+# VS Code (optionnel)
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Rapport des test
+flake8-report.txt
+mypy-report.txt
+tests-e2e-report.txt
+git-stats-report.txt
+isort-report.txt
+radon-report.txt
+html_css_validation-report.txt
+
+
+# Page HTML rendues
+rendered*.html
+
+# Node modules (si vous utilisez Node.js pour le frontend)
+node_modules/
+
+# EXCLUSION DE SONAR-SCANNER
+.scannerwork/
