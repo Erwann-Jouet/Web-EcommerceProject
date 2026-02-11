@@ -1,0 +1,16 @@
+#!/bin/bash
+# WebTool wrapper pour Linux/Mac
+# Redirige vers le script Python principal
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_SCRIPT="$SCRIPT_DIR/.webTool/bin/webtool.py"
+
+# Vérifier que Python3 est installé
+if ! command -v python3 &> /dev/null; then
+    echo "❌ Erreur : Python 3 n'est pas installé sur votre ordinateur !"
+    echo "ℹ️  Téléchargez Python sur : https://www.python.org/downloads/"
+    exit 1
+fi
+
+# Lancer le script Python
+exec python3 "$PYTHON_SCRIPT" "$@"

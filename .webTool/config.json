@@ -1,0 +1,23 @@
+{
+  "_comment": "Configuration WebTool - Ne pas modifier sauf instruction",
+  "repository_url": "git@gitlab2.istic.univ-rennes1.fr:l2_istn_web_prj/web-tp-projet-02-04.git",
+  "_passphrase": "Votre passphrase est disponible sur le site https://pwa-dashboard.istic.univ-rennes1.fr/",
+  "project_group_name": "web-tp-projet-02-04",
+  "branches": [
+    "tp",
+    "projet"
+  ],
+  "upstream_url": "git@gitlab2.istic.univ-rennes1.fr:l2_istn_web_prj/web-tp-projet-base.git",
+  "members": {
+    "cgorce": {
+      "lastname": "GORCE",
+      "firstname": "CHARLYNE",
+      "email": "charlyne.gorce@etudiant.univ-rennes.fr"
+    },
+    "ejouet": {
+      "lastname": "JOUET",
+      "firstname": "ERWANN",
+      "email": "erwann.jouet@etudiant.univ-rennes.fr"
+    }
+  }
+}

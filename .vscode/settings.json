@@ -1,0 +1,56 @@
+{
+  "python.analysis.extraPaths": ["./tp-projet"],
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.rulers": [110],
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true
+  },
+  "files.associations": {
+    "*.html": "html"
+  },
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestPath": "${workspaceFolder}/.venv/bin/pytest",
+  "python.testing.cwd": "${workspaceFolder}/tests",
+  "pylint.enabled": false,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingTypeStubs": "none",
+    "reportMissingImports": "none",
+    "reportMissingModuleSource": "none"
+  },
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "mypy-type-checker.cwd": "${workspaceFolder}/tp-projet",
+  "mypy-type-checker.args": ["--config-file=pyproject.toml"],
+  "isort.check": true,
+  "isort.args": ["--settings-path=${workspaceFolder}/tp-projet/pyproject.toml"],
+  "black-formatter.args": [
+    "--config=${workspaceFolder}/tp-projet/pyproject.toml"
+  ],
+  "flake8.cwd": "${workspaceFolder}/tp-projet",
+  "flake8.args": ["--config=${workspaceFolder}/tp-projet/.flake8"],
+  "djlint.enableLinting": false,
+  "djlint.useVenv": true,
+  "[jinja-html]": {
+    "editor.defaultFormatter": "monosans.djlint",
+    "editor.formatOnSave": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "monosans.djlint"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "djlint.showInstallError": false
+}
