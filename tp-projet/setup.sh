@@ -1,28 +1,8 @@
 #!/bin/bash
 # Script de setup automatique pour démarrer rapidement le projet
 
-set -e  # Arrêter en cas d'erreur
-
 echo "🚀 Setup automatique du projet E-commerce Flask"
 echo "==============================================="
-echo ""
-
-# Vérifier si Docker est installé
-if command -v docker &> /dev/null && command -v docker-compose &> /dev/null; then
-    echo "✅ Docker et Docker Compose détectés"
-    echo ""
-    read -p "Voulez-vous utiliser Docker ? (recommandé) [O/n] : " use_docker
-    
-    if [[ "$use_docker" != "n" && "$use_docker" != "N" ]]; then
-        echo ""
-        echo "🐳 Lancement avec Docker..."
-        docker-compose up --build
-        exit 0
-    fi
-fi
-
-echo ""
-echo "📦 Installation manuelle..."
 echo ""
 
 # Vérifier Python

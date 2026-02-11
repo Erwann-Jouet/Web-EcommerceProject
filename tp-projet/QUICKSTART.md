@@ -1,100 +1,99 @@
-# 🚀 Démarrage Rapide - Pour les visiteurs GitHub
+# 🚀 Guide de Démarrage Rapide
 
-Ce projet est une application e-commerce Flask. Voici comment la visualiser sans installation complexe :
+Ce document explique comment lancer l'application e-commerce Flask.
 
-## ✨ Option 1 : Docker (Le plus simple - 2 commandes)
+## ⚡ Option 1 : Script automatique (Recommandé)
 
-**Prérequis** : Avoir [Docker Desktop](https://www.docker.com/get-started) installé
+**La méthode la plus simple** - tout est automatisé !
 
 ```bash
 # 1. Clonez le projet
-git clone <votre-url-repo>
+git clone <votre-repo-url>
 cd tp-projet
 
-# 2. Lancez l'application
-docker-compose up
+# 2. Lancez le script
+./setup.sh
 ```
 
-**C'est tout !** 🎉 L'application est accessible sur <http://localhost:5000>
+Le script va :
 
-Pour arrêter : `Ctrl+C` puis `docker-compose down`
+- ✅ Créer un environnement virtuel Python
+- ✅ Installer toutes les dépendances
+- ✅ Configurer le fichier .env
+- ✅ Lancer l'application automatiquement
 
----
-
-## 🌐 Option 2 : Voir une démo en ligne
-
-**Versions déployées** (aucune installation nécessaire) :
-
-- 🔗 **Demo Render** : [lien à venir après déploiement]
-- 🔗 **Demo Railway** : [lien à venir après déploiement]
-
-*Note : La première visite peut prendre 30-60 secondes (démarrage du serveur gratuit)*
+**⏱️ Temps** : 2-3 minutes  
+**➜ Accès** : <http://localhost:5000>
 
 ---
 
-## 💻 Option 3 : Installation traditionnelle
+## 💻 Option 2 : Installation manuelle
 
-Si vous ne pouvez pas utiliser Docker :
+Si vous préférez contrôler chaque étape :
 
 ```bash
-# 1. Clonez et entrez dans le projet
-git clone <votre-url-repo>
+# 1. Cloner le projet
+git clone <votre-repo-url>
 cd tp-projet
 
-# 2. Créez un environnement virtuel
+# 2. Créer un environnement virtuel
 python3 -m venv venv
 source venv/bin/activate  # Sur Windows: venv\Scripts\activate
 
-# 3. Installez les dépendances
+# 3. Installer les dépendances
 pip install -e .
 
-# 4. Lancez l'application
+# 4. Lancer l'application
 python run.py development
 ```
 
-Ouvrez <http://localhost:5000>
-
----
-
-## 📚 Documentation complète
-
-- **Guide de déploiement complet** : [DEPLOYMENT.md](DEPLOYMENT.md)
-- **README du projet** : [README.md](README.md)
+**⏱️ Temps** : 5 minutes  
+**➜ Accès** : <http://localhost:5000>
 
 ---
 
 ## 🎯 Fonctionnalités
 
-- 🛍️ Catalogue de produits avec recherche
-- 🛒 Panier d'achat
-- 👤 Authentification utilisateur
-- 📱 Interface responsive
-- 💾 Base de données SQLite (développement)
+- 🛍️ **Catalogue produits** - Navigation par catégories
+- 🔍 **Recherche** - Trouvez rapidement vos produits
+- 🛒 **Panier** - Ajout/suppression d'articles
+- 👤 **Authentification** - Inscription et connexion
+- 📱 **Responsive** - Fonctionne sur tous les écrans
 
 ---
 
-## 🐛 Problèmes courants
+## 🔧 Dépannage
 
-**Le port 5000 est déjà utilisé ?**
+### Le script setup.sh n'est pas exécutable
 
 ```bash
-# Changez le port dans docker-compose.yml
-ports:
-  - "8080:5000"  # Utilisez 8080
+chmod +x setup.sh
+./setup.sh
 ```
 
-**L'application ne démarre pas ?**
+### Python introuvable
+
+Installez Python 3.8+ depuis <https://python.org>
+
+### Port 5000 déjà utilisé
+
+Modifiez le port dans `run.py` ou arrêtez l'autre application.
+
+### Erreur lors de l'installation des dépendances
 
 ```bash
-# Reconstruisez les images Docker
-docker-compose build --no-cache
-docker-compose up
+pip install --upgrade pip
+pip install -e .
 ```
 
 ---
 
-## 📧 Contact
+## 📚 Documentation
 
-Pour toute question, ouvrez une issue sur GitHub.
+- **README complet** : [README.md](README.md)
+- **Configuration** : Voir `.env.example`
+- **Dépendances** : Voir `pyproject.toml`
 
-**Bon test ! 🚀**
+---
+
+**Bon développement ! 🚀**

@@ -1,5 +1,4 @@
 # Fichier généré automatiquement depuis pyproject.toml
-# Pour les plateformes qui ne supportent pas pyproject.toml
 
 Flask==3.0.0
 SQLAlchemy==2.0.25
@@ -7,4 +6,3 @@ Flask-SQLAlchemy==3.1.1
 python-dotenv>=1.0.0
 requests>=2.0.0
 types-requests>=2.0.0
-gunicorn>=21.0.0
