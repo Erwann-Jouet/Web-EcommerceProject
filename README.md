@@ -1,6 +1,6 @@
 # 🛍️ MonShop - E-commerce Flask
 
-> Application e-commerce moderne développée avec Flask et SQLAlchemy
+> Modern e-commerce application built with Flask and SQLAlchemy
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Flask](https://img.shields.io/badge/Flask-3.0.0-green.svg)
@@ -9,123 +9,123 @@
 
 ---
 
-## 📋 Table des matières
+## 📋 Table of Contents
 
-- [À propos](#-à-propos)
-- [Fonctionnalités](#-fonctionnalités)
-- [Démarrage rapide](#-démarrage-rapide)
-- [Installation détaillée](#-installation-détaillée)
-- [Structure du projet](#-structure-du-projet)
-- [Modèles de données](#-modèles-de-données)
+- [About](#-about)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Detailed Installation](#-detailed-installation)
+- [Project Structure](#-project-structure)
+- [Data Models](#-data-models)
 - [Documentation](#-documentation)
 
 ---
 
-## 📖 À propos
+## 📖 About
 
-**MonShop** est une application e-commerce complète avec :
+**MonShop** is a complete e-commerce application with:
 
-- 🛍️ Gestion de catalogue produits avec catégories et sous-catégories
-- 🛒 Système de panier d'achat dynamique
-- 👤 Authentification multi-rôles (admin, gérant, client)
-- 💾 Base de données relationnelle avec SQLAlchemy ORM
-- 📱 Interface responsive
-- 🔍 Recherche et filtres avancés
+- 🛍️ Product catalog management with categories and subcategories
+- 🛒 Dynamic shopping cart system
+- 👤 Multi-role authentication (admin, manager, customer)
+- 💾 Relational database with SQLAlchemy ORM
+- 📱 Responsive interface
+- 🔍 Advanced search and filters
 
-**Stack technique :** Flask, SQLAlchemy, Jinja2, SQLite
-
----
-
-## ✨ Fonctionnalités
-
-### 🛍️ Catalogue
-
-- Navigation par catégories et sous-catégories
-- Recherche de produits
-- Filtrage par marque et prix
-- Fiches produits détaillées
-
-### 🛒 Panier
-
-- Ajout/suppression d'articles
-- Modification des quantités
-- Persistance du panier en session
-
-### 👤 Authentification
-
-- Inscription et connexion
-- Gestion de profil utilisateur
-- Rôles utilisateurs (admin, gérant, client)
-
-### 💾 Base de données
-
-- SQLite (développement)
-- Modèles avec SQLAlchemy ORM
-- Fixtures de données pour tests
+**Tech Stack:** Flask, SQLAlchemy, Jinja2, SQLite
 
 ---
 
-## 🚀 Démarrage rapide
+## ✨ Features
 
-### ⚡ Option 1 : Script automatique (Recommandé)
+### 🛍️ Catalog
+
+- Navigation by categories and subcategories
+- Product search
+- Filtering by brand and price
+- Detailed product pages
+
+### 🛒 Cart
+
+- Add/remove items
+- Modify quantities
+- Session-based cart persistence
+
+### 👤 Authentication
+
+- Registration and login
+- User profile management
+- User roles (admin, manager, customer)
+
+### 💾 Database
+
+- SQLite (development)
+- Models with SQLAlchemy ORM
+- Data fixtures for testing
+
+---
+
+## 🚀 Quick Start
+
+### ⚡ Option 1: Automated Script (Recommended)
 
 ```bash
-# Cloner le projet
-git clone https://github.com/votre-username/votre-repo.git
+# Clone the project
+git clone https://github.com/your-username/your-repo.git
 cd tp-projet
 
-# Installer et lancer
+# Install and launch
 ./setup.sh
 ```
 
-**➜** L'application sera accessible sur <http://localhost:5000>
+**➜** The application will be accessible at <http://localhost:5000>
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project Structure
 
 ```
 tp-projet/
-├── 📄 app.py                   # Application Flask principale
-├── 📄 run.py                   # Script de lancement
-├── 📄 config.py                # Configuration de l'application
-├── 📄 setup.sh                 # Script d'installation automatique
-├── 📄 pyproject.toml           # Dépendances et configuration
+├── 📄 app.py                   # Main Flask application
+├── 📄 run.py                   # Launch script
+├── 📄 config.py                # Application configuration
+├── 📄 setup.sh                 # Automated installation script
+├── 📄 pyproject.toml           # Dependencies and configuration
 │
-├── 📂 src/                     # Code source
-│   ├── 📂 models/              # Modèles de données (SQLAlchemy)
+├── 📂 src/                     # Source code
+│   ├── 📂 models/              # Data models (SQLAlchemy)
 │   │   ├── category.py
-│   │   ├── product.py
+│   │   ├���─ product.py
 │   │   ├── user.py
 │   │   ├── cart.py
 │   │   └── cart_item.py
 │   │
-│   ├── 📂 auth/                # Authentification
+│   ├── 📂 auth/                # Authentication
 │   │   ├── routes.py
 │   │   └── utils.py
 │   │
-│   ├── 📂 catalog/             # Catalogue produits
+│   ├── 📂 catalog/             # Product catalog
 │   │   └── routes.py
 │   │
-│   ├── 📂 cart/                # Panier d'achat
+│   ├── 📂 cart/                # Shopping cart
 │   │   ├── routes.py
 │   │   └── services.py
 │   │
-│   ├── 📂 api/                 # API REST
+│   ├── 📂 api/                 # REST API
 │   │   └── routes.py
 │   │
-│   └── 📂 templates/           # Templates Jinja2
+│   └── 📂 templates/           # Jinja2 templates
 │       ├── base.html
 │       ├── index.html
 │       ├── auth/
 │       └── cart/
 │
-├── 📂 static/                  # Fichiers statiques
+├── 📂 static/                  # Static files
 │   ├── css/
 │   ├── js/
 │   └── img/
 │
-└── 📂 datafixtures/            # Données de test
+└── 📂 datafixtures/            # Test data
     ├── import_all.py
     └── json/
         ├── categories.json
@@ -135,101 +135,95 @@ tp-projet/
 
 ---
 
-## 💾 Modèles de données
+## 💾 Data Models
 
-Le projet utilise **SQLAlchemy** avec **SQLite** et fournit cinq modèles principaux :
+The project uses **SQLAlchemy** with **SQLite** and provides five main models:
 
 ### 📦 Category
 
-Représente les catégories et sous-catégories de produits avec une relation parent-enfant.
+Represents product categories and subcategories with a parent-child relationship.
 
-**Champs :**
+**Fields:**
 
-- `id` : Identifiant unique
-- `name` : Nom de la catégorie
-- `slug` : URL-friendly identifier
-- `parent_id` : Référence à la catégorie parente
+- `id`: Unique identifier
+- `name`: Category name
+- `slug`: URL-friendly identifier
+- `parent_id`: Reference to parent category
 
-**Relations :**
+**Relationships:**
 
-- `parent` : Catégorie parente
-- `children` : Sous-catégories
+- `parent`: Parent category
+- `children`: Subcategories
 
 ### 🏷️ Product
 
-Représente les produits du catalogue.
+Represents catalog products.
 
-**Champs :**
+**Fields:**
 
 - `id`, `name`, `slug`, `brand`
 - `description`, `price`
 - `category_id`, `subcategory_id`
 - `image_url`, `stock_quantity`
 
-**Relations :**
+**Relationships:**
 
-- `category` : Catégorie principale
-- `subcategory` : Sous-catégorie (optionnelle)
+- `category`: Main category
+- `subcategory`: Subcategory (optional)
 
 ### 👤 User
 
-Représente les utilisateurs du site.
+Represents site users.
 
-**Champs :**
+**Fields:**
 
 - `id`, `username`, `password`, `email`
-- `role` : admin, gérant, client
+- `role`: admin, manager, customer
 - `adresse`, `code_postal`, `ville`, `pays`
 
 ### 🛒 Cart & CartItem
 
-Gestion du panier d'achat.
+Shopping cart management.
 
-**Cart :**
+**Cart:**
 
 - `id`, `user_id`, `created_at`, `updated_at`
 
-**CartItem :**
+**CartItem:**
 
 - `id`, `cart_id`, `product_id`, `quantity`
 
 ---
 
-## 🛠️ Technologies utilisées
+## 🛠️ Technologies Used
 
-| Technologie | Version | Usage |
+| Technology | Version | Usage |
 |-------------|---------|-------|
-| **Python** | 3.8+ | Langage principal |
-| **Flask** | 3.0.0 | Framework web |
-| **SQLAlchemy** | 2.0.25 | ORM base de données |
-| **Flask-SQLAlchemy** | 3.1.1 | Intégration SQLAlchemy |
-| **Jinja2** | - | Moteur de templates |
-| **SQLite** | - | Base de données |
+| **Python** | 3.8+ | Main language |
+| **Flask** | 3.0.0 | Web framework |
+| **SQLAlchemy** | 2.0.25 | Database ORM |
+| **Flask-SQLAlchemy** | 3.1.1 | SQLAlchemy integration |
+| **Jinja2** | - | Template engine |
+| **SQLite** | - | Database |
 
 ---
 
 ## 📚 Documentation
 
-- **[Guide de démarrage rapide](QUICKSTART.md)** - Installation en 5 minutes
-- **[Informations projet](PROJET_INFO.md)** - Vue d'ensemble complète
-- **[Configuration](config.py)** - Paramètres de l'application
+- **[Quick Start Guide](QUICKSTART.md)** - 5-minute installation
+- **[Project Information](PROJET_INFO.md)** - Complete overview
+- **[Configuration](config.py)** - Application settings
 
-### Ressources externes
+### External Resources
 
-- [Documentation Flask](https://flask.palletsprojects.com/)
-- [Documentation SQLAlchemy](https://docs.sqlalchemy.org/)
-- [Documentation Jinja2](https://jinja.palletsprojects.com/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
+- [Jinja2 Documentation](https://jinja.palletsprojects.com/)
 - [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
 
 ---
 
-## 📝 Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
----
-
-## 👨‍💻 Auteur
+## 👨‍💻 Author
 
 **Erwann Jouet**
 
@@ -237,13 +231,6 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ---
 
-## 🙏 Remerciements
+**⭐ Feel free to star this project if you like it!**
 
-- Flask et SQLAlchemy pour leurs excellents frameworks
-- La communauté Python pour les ressources et documentation
-
----
-
-**⭐ N'hésitez pas à mettre une étoile si ce projet vous a plus !
-
-**Bon développement ! 🚀**
+**Happy coding! 🚀**
